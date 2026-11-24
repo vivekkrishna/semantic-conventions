@@ -11,10 +11,24 @@ This group describes attributes specific to [software tests](https://wikipedia.o
 
 | Key | Stability | Value Type | Description | Example Values |
 | --- | --- | --- | --- | --- |
+| <a id="test-case-intent-id" href="#test-case-intent-id">`test.case.intent.id`</a> | ![Development](https://img.shields.io/badge/-development-blue) | string | An immutable identifier for what the [test case](https://wikipedia.org/wiki/Test_case) verifies, independent of the test case's name, location, parameters, or implementation. [1] | `checkout.coupon.apply-guest`; `int_x4esfnmezl7svowafeiiyy4r4m` |
 | <a id="test-case-name" href="#test-case-name">`test.case.name`</a> | ![Development](https://img.shields.io/badge/-development-blue) | string | The fully qualified human readable name of the [test case](https://wikipedia.org/wiki/Test_case). | `org.example.TestCase1.test1`; `example/tests/TestCase1.test1`; `ExampleTestCase1_test1` |
 | <a id="test-case-result-status" href="#test-case-result-status">`test.case.result.status`</a> | ![Development](https://img.shields.io/badge/-development-blue) | string | The status of the actual test case result from test execution. | `pass`; `fail` [(see more)](#test-case-result-status-values) |
 | <a id="test-suite-name" href="#test-suite-name">`test.suite.name`</a> | ![Development](https://img.shields.io/badge/-development-blue) | string | The human readable name of a [test suite](https://wikipedia.org/wiki/Test_suite). | `TestSuite1` |
 | <a id="test-suite-run-status" href="#test-suite-run-status">`test.suite.run.status`</a> | ![Development](https://img.shields.io/badge/-development-blue) | string | The status of the test suite run. | `success`; `failure`; `skipped`; `aborted`; `timed_out`; `in_progress` [(see more)](#test-suite-run-status-values) |
+
+**[1] `test.case.intent.id`:** Two test case executions with the same `test.case.intent.id` verify the same behavior.
+The value SHOULD NOT change when the test case is renamed, moved, re-parameterized,
+ported to another framework, or repaired. When what the test case verifies changes,
+a new value SHOULD be used.
+
+Instrumentations SHOULD NOT generate this value. They SHOULD read it from an identifier
+declared in the test framework's metadata (for example a tag, mark, or annotation) or
+supplied by a test management system, and SHOULD NOT set the attribute when none is declared.
+
+The format of the value is not specified. It can be a hand-assigned key, an identifier
+from a test management system, or a deterministic fingerprint of a canonical description
+of the intent.
 
 ---
 

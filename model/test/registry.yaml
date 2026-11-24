@@ -62,6 +62,26 @@ groups:
             "example/tests/TestCase1.test1",
             "ExampleTestCase1_test1",
           ]
+      - id: test.case.intent.id
+        type: string
+        stability: development
+        brief: >
+          An immutable identifier for what the [test case](https://wikipedia.org/wiki/Test_case)
+          verifies, independent of the test case's name, location, parameters, or implementation.
+        note: |
+          Two test case executions with the same `test.case.intent.id` verify the same behavior.
+          The value SHOULD NOT change when the test case is renamed, moved, re-parameterized,
+          ported to another framework, or repaired. When what the test case verifies changes,
+          a new value SHOULD be used.
+
+          Instrumentations SHOULD NOT generate this value. They SHOULD read it from an identifier
+          declared in the test framework's metadata (for example a tag, mark, or annotation) or
+          supplied by a test management system, and SHOULD NOT set the attribute when none is declared.
+
+          The format of the value is not specified. It can be a hand-assigned key, an identifier
+          from a test management system, or a deterministic fingerprint of a canonical description
+          of the intent.
+        examples: ["checkout.coupon.apply-guest", "int_x4esfnmezl7svowafeiiyy4r4m"]
       - id: test.case.result.status
         type:
           members:
